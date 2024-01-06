@@ -1,11 +1,10 @@
 mod days;
 mod etc;
 
+use days::{day01, day02};
 use etc::solution::Solution;
-use days::{day01,day02};
 use std::env;
 use std::time::Instant;
-
 
 pub type SolutionPair = (Solution, Solution);
 
@@ -15,8 +14,12 @@ fn main() {
         panic!("Please provide the day(s) to run as a command-line argument.");
     }
 
-    let days: Vec<u8> = args[1..].iter()
-        .map(|x| x.parse().unwrap_or_else(|v| panic!("Not a valid day: {}", v)))
+    let days: Vec<u8> = args[1..]
+        .iter()
+        .map(|x| {
+            x.parse()
+                .unwrap_or_else(|v| panic!("Not a valid day: {}", v))
+        })
         .collect();
 
     let mut runtime = 0.0;
